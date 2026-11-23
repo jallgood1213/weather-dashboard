@@ -525,7 +525,7 @@ function displayDailyForecast(daily) {
         low.className = "daily-low";
         low.textContent = `${Math.round(daily.temperature_2m_min[i])}°F`;
 
-        // Create the percipitation probability.
+        // Create the precipitation probability.
         const rain = document.createElement("p");
         rain.className = "daily-rain";
         rain.textContent = `Rain: ${daily.precipitation_probability_max[i]}%`;
