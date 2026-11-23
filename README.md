@@ -80,3 +80,7 @@
 - The Google Lighthouse audit displaying perfect scores across all four categories.
 
 ![Weather Dashboard - Lighthouse Results](screenshots/lighthouse.png) 
+
+## Live Demo
+
+- [View the Weather Dashboard](https://jallgood1213.github.io/weather-dashboard/)
