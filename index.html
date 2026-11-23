@@ -1,0 +1,148 @@
+<!--
+Project: Weather Dashboard
+Developer: Joshua Allgood
+File: index.html
+
+Description: An interactive, responsive dashboard that displays current weather conditions and forecasts using live 
+API data.
+
+Technologies: HTML5, CSS3, JavaScript
+
+File Responsibilities:
+    - Define the application's HTML structure.
+    - Provide a search interface for city location.
+    - Provide accessible content and navigation
+    - Display current weather conditions and forecasts.
+    - Connect external CSS and JavaScript files.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather Dashboard</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <meta name="description" content="Explore current conditions, hourly forecast, and 7-day forecast for cities worldwide with this weather dashboard.">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+   <main id="weather-dashboard">
+    <!-- 1. DASHBOARD HEADER -- Displays the application title and subtitle. -->
+     <header id="dashboard-header">
+        <h1>Weather Dashboard</h1>
+        <p>Stay informed with real-time weather updates.</p>
+     </header>
+    
+    <!-- 2. LOCATION SEARCH -- Allows users to search for weather by city. -->
+     <section id="search-section" aria-label="Search for weather">
+
+        <form id="search-form">
+            <label for="city-input">Search by City</label>
+
+            <div id="search-container">
+                <input
+                    type="search"
+                    id="city-input"
+                    name="city"
+                    placeholder="Enter a city name"
+                    autocomplete="address-level2"
+                    required
+                >
+
+                <button type="submit" id="search-btn">
+                    Search
+                </button>
+            </div>
+
+            <!-- Displays matching cities when multiple locations are found. -->
+             <div id="location-results" hidden>
+
+                <label for="location-select">Select a Location</label>
+
+                <select id="location-select" name="location">
+                    <option value="">Choose a city and state</option>
+                </select>
+             </div>
+
+             <!-- Displays search errors and helpful messages. -->
+              <p id="search-message" role="status" aria-live="polite" hidden></p>
+
+        </form>
+     </section>
+
+     <!-- 3. CURRENT WEATHER -- Displays the selected city's current conditions. -->
+      <section id="current-weather" aria-labelledby="current-weather-heading">
+
+        <h2 id="current-weather-heading">Current Weather</h2>
+
+        <!-- Refresh the weather for the current selected city. -->
+         <button type="button" id="refresh-weather" disabled>
+            Refresh Weather
+         </button>
+
+        <div id="weather-card">
+
+            <div id="weather-location">
+                <h3 id="city-name">Search for a City</h3>
+                <p id="weather-date">Weather information will appear here.</p>
+            </div>
+
+            <div id="weather-main">
+                <p id="temperature">-- °F</p>
+                <p id="weather-description">No weather data available</p>
+            </div>
+
+            <div id="weather-details">
+
+                <div class="weather-detail">
+                    <p>Feels like</p>
+                    <span id="feels-like">--°F</span>
+                </div>
+
+                <div class="weather-detail">
+                    <p>Humidity</p>
+                    <span id="humidity">--%</span>
+                </div>
+
+                <div class="weather-detail">
+                    <p>Wind Speed</p>
+                    <span id="wind-speed">-- mph</span>
+                </div>
+            </div>
+        </div>
+      </section>
+
+    <!-- 4. HOURLY FORECAST -- Displays upcoming hourly weather conditions. -->
+       <section id="hourly-forecast" aria-labelledby="hourly-forecast-heading">
+
+        <h2 id="hourly-forecast-heading">Hourly Forecast</h2>
+
+        <div id="hourly-container">
+            <p id="hourly-placeholder">
+                Search for a city to view the hourly forecast.
+            </p>
+        </div>
+       </section>
+    
+    <!-- 5. SEVEN-DAY FORECAST -- Displays daily weather conditions for the upcoming week. -->
+     <section id="daily-forecast" aria-labelledby="daily-forecast-heading">
+
+        <h2 id="daily-forecast-heading">7-Day Forecast</h2>
+
+        <div id="daily-container">
+            <p id="daily-placeholder">Search for a city to view the 7-day forecast</p>
+        </div>
+     </section>
+
+   </main>
+
+</body>
+
+</html>

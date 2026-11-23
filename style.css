@@ -1,0 +1,566 @@
+/*
+Project: Weather Dashboard
+Developer: Joshua Allgood
+File: style.css
+
+Description: Provides the visual styling and responsive layout for the Weather Dashboard applicaiton.
+
+Technologies: CSS3
+
+File Responsibilities:
+    - Define the application's color scheme.
+    - Style the dashboard layout and weather cards.
+    - Style the location search interface.
+    - Provide responsive layouts for different devices.
+    - Provide visual feedback for user interactions.
+*/
+
+/* 1. COLOR VARIABLES -- Defines the application's color palette. */
+
+:root {
+    --dark-navy: #0C1729;
+    --midnight-blue: #142a46;
+    --ocean-blue: #2869A0;
+    --sky-blue: #8EBBE9;
+    --white: #FFFFFF;
+    --light-text: #DCEBFF;
+    --muted-text: #AFC6DF;
+}
+
+/* 2. GLOBAL RESET -- Removes default brower spacing and establishes consistent element sizing. */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 3. BODY STYLING -- Establishes the dashboard background, typography, and default text colors. */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, var(--dark-navy), var(--midnight-blue));
+    color: var(--white);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* 4. MAIN DASHBOARD CONTAINER -- Centers the dashboard and controls its maximum width and spacing. */
+
+#weather-dashboard {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+}
+
+/* 5. DASHBOARD HEADER -- Styles the application title and subtitle. */
+
+#dashboard-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+#dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+#dashboard-header p {
+    font-size: 1.1rem;
+    color: var(--muted-text);
+}
+
+/* 6. LOCATION SEARCH SECTION -- Styles the city search area and form. */
+
+#search-section {
+    max-width: 650px;
+    margin: 0 auto 40px;
+}
+
+#search-form label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--light-text);
+    margin-bottom: 10px;
+}
+
+#search-container {
+    display: flex;
+    gap: 12px;
+}
+
+#city-input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid var(--ocean-blue);
+    border-radius: 10px;
+    background-color: var(--midnight-blue);
+    color: var(--white);
+    font-size: 1rem;
+}
+
+#city-input::placeholder {
+    color: var(--muted-text);
+}
+
+#search-btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--ocean-blue);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* REFRESH WEATHER BUTTON -- Allow users to update weather without searching again. */
+
+#refresh-weather {
+    background-color: #2b6da3;
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: background-color 0.2s ease;
+}
+
+#refresh-weather:hover:not(:disabled) {
+    background-color: #1d527d;
+}
+
+#refresh-weather:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#refresh-weather:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* A. LOCATION RESULTS -- Styles the matching city selection area. */
+
+#location-results {
+    margin-top: 20px;
+}
+
+/* B. Location Selection Label */
+#location-results label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--light-text);
+    margin-bottom: 10px;
+}
+
+/* C. Location Dropdown */
+#location-select {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+
+    border: 1px solid var(--ocean-blue);
+    border-radius: 10px;
+
+    background-color: var(--midnight-blue);
+    color: var(--white);
+
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+
+    cursor: pointer;
+    color-scheme: dark;
+}
+
+/* D. Location Dropdown Focus Effect */
+#location-select:focus-visible {
+    outline: 2px solid var(--sky-blue);
+    outline-offset: 2px;
+}
+
+/* E. Hide Location Results Until Needed */
+#location-results[hidden] {
+    display: none;
+}
+
+/* 7. SEARCH INTERACTION EFFECTS -- Provides visual feedback when users interact with the search interface. */
+
+#city-input:focus {
+    outline: 2px solid var(--sky-blue);
+    outline-offset: 2px;
+}
+
+#search-btn:hover {
+    background-color: var(--sky-blue);
+    color: var(--dark-navy);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#search-btn:focus-visible {
+    outline: 2px solid var(--sky-blue);
+    outline-offset: 3px;
+}
+
+#search-btn:active {
+    transform: scale(0.97);
+}
+
+/* B. SEARCH MESSAGE -- Styles feedback during weather searches. */
+
+/* Blue styling for loading messages. */
+#search-message {
+    margin-top: 16px;
+    padding: 12px 16px;
+
+    background-color: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 10px;
+
+    color: #bae6fd;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Red styling for error messages. */
+#search-message.error {
+    background-color: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #ffb4b4;
+}
+
+/* Keep the message hidden when not needed. */
+#search-message[hidden] {
+    display: none;
+}
+
+/* 8. CURRENT WEATHER CARD -- Styles the current weather section with a blue gradient and rounded corners. */
+
+#current-weather {
+    margin-bottom: 40px;
+}
+
+#current-weather-heading {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+#weather-card {
+    background: linear-gradient(135deg, var(--midnight-blue), var(--ocean-blue));
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 9. WEATHER LOCATION AND TEMPERATURE -- Styles the city name, date, temperature, and current weather description. */
+
+#weather-location {
+    margin-bottom: 25px;
+}
+
+#city-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+#weather-date {
+    font-size: 0.95rem;
+    color: var(--light-text);
+    margin-top: 5px;
+}
+
+#weather-main {
+    margin-bottom: 30px;
+}
+
+#temperature {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+}
+
+#weather-description {
+    font-size: 1.1rem;
+    color: var(--light-text);
+    margin-top: 8px;
+}
+
+/* 10. WEATHER DETAILS GRID -- Displays additional weather information in three evenly space columns. */
+
+#weather-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weather-detail {
+    text-align: center;
+}
+
+.weather-detail p {
+    font-size: 0.95rem;
+    color: var(--light-text);
+    margin-bottom: 8px;
+}
+
+.weather-detail span {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+/* 11. RESPONSIVE DESIGN -- Adjusts the dashboard layout for mobile devices and smaller screens. */
+
+@media (max-width: 600px) {
+    
+    #weather-dashboard {
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    #dashboard-header h1 {
+        font-size: 2rem;
+    }
+
+    #dashboard-header p {
+        font-size: 1rem;
+    }
+
+    #search-container {
+        flex-direction: column;
+    }
+
+    #search-btn {
+        width: 100%;
+    }
+
+    #weather-card {
+        padding: 20px;
+    }
+
+    #weather-details {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .weather-detail {
+        text-align: left;
+    }
+}
+
+/* 12. HOURLY FORECAST SECTION -- Styles the hourly forecast container and individual forecast cards. */
+
+/* A. Hourly Forecast section */
+#hourly-forecast {
+    margin-top: 40px;
+}
+
+/* B. Hourly Forecast Container */
+#hourly-container {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+
+    background: linear-gradient(135deg, #173251, #2b689c);
+    border-radius: 20px;
+
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+/* C. Hourly Forecast Placeholder */
+#hourly-placeholder {
+    color: #d1e3f5;
+    font-size: 1rem;
+    padding: 12px 0;
+}
+
+/* D. Individual Hourly Forecast Cards. */
+.hourly-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+    padding: 20px 16px;
+
+    min-width: 110px;
+    flex-shrink: 0;
+
+    background: rgba(12, 35, 64, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+/* E. HOURLY CARD INFORMATION -- Styles the forecast details inside each card. */
+
+.hourly-time {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #c4ddf5;
+}
+
+.hourly-icon {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.hourly-temperature {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.hourly-rain {
+    font-size: 0.85rem;
+    color: #c2dcf3;
+    white-space: nowrap;
+}
+
+#hourly-forecast h2 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+/* 13. SEVEN-DAY FORECAST SECTION -- Styes the daily forecast container and prepares the layout forecast cards. */
+
+/* A. Daily Forecast Section */
+#daily-forecast {
+    margin-top: 40px;
+}
+
+/* B. Daily Forecast Heading */
+#daily-forecast h2 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+/* C. Daily Forecast Container */
+#daily-container {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 12px;
+    padding: 24px;
+
+    background: linear-gradient(135deg, #173251, #2b689c);
+    border-radius: 20px;
+}
+
+/* D. Daily Forecast Placeholder */
+#daily-placeholder {
+    grid-column: 1 / -1;
+    color: var(--light-text);
+    font-size: 1rem;
+    padding: 12px 0;
+}
+
+/* E. Individual Daily Forecast Cards */
+.daily-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+    padding: 20px 12px;
+    min-width: 0;
+
+    background: rgba(12, 35, 64, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+
+    color: var(--white);
+    text-align: center;
+}
+
+/* F. Daily Forecast Day Label */
+.daily-day {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--light-text);
+}
+
+/* G. Daily Forecast Weather Icon */
+.daily-icon {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+/* H. Daily High Temperature */
+.daily-high {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+/* I. Daily Low Temperature */
+.daily-low {
+    font-size: 1.1rem;
+    color: var(--light-text);
+}
+
+/* J. Daily Precipitation Probability */
+.daily-rain {
+    font-size: 0.85rem;
+    color: var(--light-text);
+    white-space: nowrap;
+}
+
+/* K. Responsive Daily Forecast Layout */
+@media (max-width: 900px) {
+    #daily-container {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    #daily-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 16px;
+    }
+
+    .daily-card {
+        padding: 16px 10px;
+        gap: 8px;
+    }
+}
+
+/* 14. REDUCED MOTION ACCESSIBILITY -- Respect users who prefer less animation. */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #hourly-container {
+        scroll-behavior: auto;
+    }
+
+    #refresh-weather {
+        transition: none;
+    }
+
+    #search-btn:hover {
+        transition: none;
+    }
+}
